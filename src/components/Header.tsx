@@ -1,6 +1,6 @@
-
-import React, { memo, useState, useEffect } from 'react';
-import { Plane, Building2, Lightbulb, Phone, Menu, X } from 'lucide-react';
+import type React from "react";
+import { memo, useState, useEffect } from "react";
+import { Plane, Building2, Lightbulb, Phone, Menu, X } from "lucide-react";
 
 const PHONE = "+966554400000";
 const WHATSAPP_LINK = `https://wa.me/966554400000`;
@@ -35,7 +35,7 @@ const TopHeader: React.FC<{
               width={150}
               height={150}
               alt="Logo"
-              className="h-8 w-auto sm:h-8 md:h-10 lg:h-auto lg:w-[150px]"
+              className="h-8 w-auto sm:h-10 md:h-12 lg:h-auto lg:w-[150px]"
             />
           </div>
 
@@ -150,17 +150,20 @@ const SecondaryNav: React.FC = () => {
       </div>
     </nav>
   );
-}
+};
 
-const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
+const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+  isOpen,
+  onClose,
+}) => {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
@@ -169,32 +172,34 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
   return (
     <>
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black/60 z-[9998] lg:hidden"
+      <div
+        className="fixed inset-0 bg-black/60 z-[9998] md:hidden"
         onClick={onClose}
         aria-hidden="true"
       />
-      
-      {/* Menu Panel */}
-      <div className={`fixed top-0 right-0 bottom-0 w-[280px] ${headerBg} z-[9999] lg:hidden overflow-y-auto`}>
+
+      {/* Menu Panel - responsive width and layout */}
+      <div
+        className={`fixed top-0 right-0 bottom-0 w-[85vw] max-w-xs ${headerBg} z-[9999] md:hidden overflow-y-auto`}
+      >
         <div className="flex flex-col min-h-full">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-4 border-b border-white/10 flex-shrink-0">
-            <span className="text-white text-base font-medium">Menu</span>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 flex-shrink-0">
+            <span className="text-white text-sm font-medium">Menu</span>
             <button
               type="button"
               onClick={onClose}
               className="text-white hover:text-gray-200 transition p-1"
               aria-label="Close menu"
             >
-              <X size={22} />
+              <X size={20} />
             </button>
           </div>
 
           {/* Menu Content */}
           <div className="flex-1 overflow-y-auto">
             {/* Navigation Items */}
-            <div className="px-3 py-4">
+            <div className="px-3 py-3">
               <div className="text-white/50 text-xs font-medium uppercase tracking-wider mb-2 px-2">
                 Navigation
               </div>
@@ -204,10 +209,15 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
                     key={key}
                     type="button"
                     onClick={onClose}
-                    className="flex items-center space-x-3 text-white hover:bg-white/10 transition w-full py-2.5 px-3 rounded-md text-left text-sm"
+                    className="flex items-center gap-3 text-white hover:bg-white/10 transition w-full py-2.5 px-3 rounded-md text-left text-sm"
                     aria-label={label}
                   >
-                    <Icon width={18} height={18} aria-hidden="true" className="flex-shrink-0" />
+                    <Icon
+                      width={18}
+                      height={18}
+                      aria-hidden="true"
+                      className="flex-shrink-0"
+                    />
                     <span className="font-normal">{label}</span>
                   </button>
                 ))}
@@ -231,8 +241,10 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
                   className="text-white hover:bg-white/10 transition flex items-center justify-between w-full py-2.5 px-3 rounded-md text-sm"
                 >
                   <span>Currency</span>
-                  <div className="flex items-center space-x-1">
-                    <span aria-hidden="true" className="text-sm">SAR</span>
+                  <div className="flex items-center gap-1">
+                    <span aria-hidden="true" className="text-sm">
+                      SAR
+                    </span>
                     <svg
                       className="w-4 h-4"
                       fill="none"
@@ -240,24 +252,29 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
                       viewBox="0 0 24 24"
                       aria-hidden="true"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </div>
                 </button>
 
                 {/* Language Button */}
-                <button 
-                  type="button" 
-                  aria-label="العربية" 
+                <button
+                  type="button"
+                  aria-label="العربية"
                   className="text-white hover:bg-white/10 transition w-full text-left py-2.5 px-3 rounded-md text-sm"
                 >
                   Language: العربية
                 </button>
 
                 {/* Retrieve Booking */}
-                <button 
-                  type="button" 
-                  aria-label="Retrieve my booking" 
+                <button
+                  type="button"
+                  aria-label="Retrieve my booking"
                   className="text-white hover:bg-white/10 transition w-full text-left py-2.5 px-3 rounded-md text-sm"
                 >
                   Retrieve my booking
@@ -266,13 +283,17 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
                 {/* WhatsApp Contact */}
                 <a
                   href={WHATSAPP_LINK}
-                  className="text-white hover:bg-white/10 transition flex items-center space-x-3 py-2.5 px-3 rounded-md text-sm"
+                  className="text-white hover:bg-white/10 transition flex items-center gap-3 py-2.5 px-3 rounded-md text-sm"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Contact via WhatsApp ${PHONE}`}
                   onClick={onClose}
                 >
-                  <Phone size={16} className="stroke-current flex-shrink-0" aria-hidden="true" />
+                  <Phone
+                    size={16}
+                    className="stroke-current flex-shrink-0"
+                    aria-hidden="true"
+                  />
                   <span>{PHONE}</span>
                 </a>
               </div>
@@ -280,7 +301,7 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
           </div>
 
           {/* Footer - Sign In Button */}
-          <div className="px-4 py-4 border-t border-white/10 flex-shrink-0">
+          <div className="px-4 py-3 border-t border-white/10 flex-shrink-0">
             <button
               type="button"
               aria-label="Sign in"
@@ -294,7 +315,7 @@ const MobileMenu: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen
       </div>
     </>
   );
-}
+};
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -311,6 +332,7 @@ const Header: React.FC = () => {
     <div>
       <TopHeader onMenuToggle={toggleMenu} isMenuOpen={isMenuOpen} />
       <SecondaryNav />
+      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
     </div>
   );
 };
