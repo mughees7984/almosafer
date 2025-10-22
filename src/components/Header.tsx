@@ -309,7 +309,7 @@ const Header: React.FC = () => {
 
   return (
     <div>
-      <TopHeader />
+      <TopHeader onMenuToggle={toggleMenu} isMenuOpen={isMenuOpen} />
       <SecondaryNav />
     </div>
   );
